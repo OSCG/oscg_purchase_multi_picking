@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="purchase_order_form_view_line_add_picking_type" model="ir.ui.view">
+            <field name="name">purchase.order.form.view</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='name']" position="after">
+                    <field name="picking_type_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
