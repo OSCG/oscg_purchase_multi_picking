@@ -21,6 +21,7 @@
         'security/purchase_multi_picking_security.xml',
         'views/purchase_inherit_view.xml'
     ],
+    'images': ['static/description/icon.png'],
     'license': 'OPL-1',
     'currency': 'USD',
     'price': 10,
