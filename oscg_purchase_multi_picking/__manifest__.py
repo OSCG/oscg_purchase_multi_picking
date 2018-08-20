@@ -21,6 +21,7 @@
         'security/purchase_multi_picking_security.xml',
         'views/purchase_inherit_view.xml'
     ],
+    'summary': "Generate multiple pickings according to the operation type of purchase lines",
     'images': ['static/description/icon.png'],
     'license': 'OPL-1',
     'currency': 'USD',
