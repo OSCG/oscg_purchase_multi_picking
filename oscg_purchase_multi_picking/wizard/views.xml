@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- 门店订货导入xls的wizard -->
+        <!-- 视图 -->
+        <record id="store_order_product_import_form_view" model="ir.ui.view">
+            <field name="name">Batch-import Products</field>
+            <field name="model">store.order.product.import</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Import Products">
+                    <group>
+                        <field name="product_categ" widget="many2many_tags"/>
+                    </group>
+                    <footer>
+                        <button string="Confirm" type="object" name="confirm_import" class="oe_highlight"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <!-- 打开wizard动作 -->
+        <record model="ir.actions.act_window" id="action_store_order_product_import">
+            <field name="name">Batch-import Products</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">store.order.product.import</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+        </record>
+        <!-- 绑定wizard视图 -->
+        <record model="ir.actions.act_window.view" id="action_store_order_product_import_view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="store_order_product_import_form_view"/>
+            <field name="act_window_id" ref="action_store_order_product_import"/>
+        </record>
+
+    </data>
+</odoo>

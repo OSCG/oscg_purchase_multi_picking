@@ -1,12 +1,37 @@
-<section class="oe_container oe_dark" >
+<section class="oe_container oe_dark">
     <div class="oe_row">
         <div class="oe_span12" style="width: 90%">
             <h2 class="oe_slogan">Purchase Multi Picking</h2>
+            <div class="oe_row oe_spaced alert alert-info" style="padding:8px;font-weight: 200; font-size: 20px;">
+                <h2 class="oe_slogan">WHERE YOU CAN APPLY THIS MODULE?</h2>
+                <div class="oe_span12">
+                    <ul>
+                        <li>For retail companies, when your business model for purchasing is that points of sale send purchase requests to HQ.
+                            HQ will perform centralized purchase with suppliers then suppliers directly deliver products to the corresponding points of sale.</li>
+                        <li>Similarly, if your company has multiple branches and branches send purchase requests to HQ......This module can also apply to this kind of situation.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="oe_row oe_spaced alert alert-info" style="padding:8px;font-weight: 200; font-size: 20px;">
+                <h2 class="oe_slogan">KEY FUTURES</h2>
+                    <div class="oe_span12">
+                        <ul>
+                            <li>Adding a picking type field on purchase order line model.The original odoo function creates one receive picking per purchase order and one move per purchase order line according to the picking type of the purchase order.
+                                With our module, a purchase order generates moves and pickings according to the picking type of purchase lines( if there isn't any picking type for a line, still use the picking type of the order)
+                             , and moves of lines with same picking type, will eventually merge into one picking.</li>
+                            <li>
+                                Print purchase orders' aggregate delivery information by a button added in the menu. The printed document will have shipping address, contact, phone number and product details of each picking.
+                            </li>
+                        </ul>
+                   </div>
+            </div>
             <h4 class="oe_slogan">How to use</h4>
             <div class="oe_screenshot" style="text-align: left;">
                 <ul>
                     <li style="font-weight:bold;">
-                        Create PO, choose correct operation type for lines that you what to apply precise operation types. Then confirm PO.
+                        Create PO, choose correct operation type for lines that you what to apply precise operation
+                        types. Then confirm PO.
                     </li>
                 </ul>
                 <img src="1.png" style="width: 100%; margin-bottom: 18px; border: 1px solid lightslategray">
@@ -17,7 +42,9 @@
                         PO then will go into "Purchase Order" state.
                     </li>
                     <li style="font-weight:bold;">
-                        Pickings are generated according to the operation type of PO lines. if there is no operation type for a line, the line will use the picking type of the PO instead, which is the original odoo function.
+                        Pickings are generated according to the operation type of PO lines. if there is no operation
+                        type for a line, the line will use the picking type of the PO instead, which is the original
+                        odoo function.
                     </li>
                 </ul>
                 <img src="2.png" style="width: 100%; margin-bottom: 18px; border: 1px solid lightslategray">
@@ -32,22 +59,25 @@
 </section>
 
 <section class="oe_container">
-   <div class="oe_row" style="background-color: #227980;">
-       <div style="margin-bottom:10px;" class="oe_slogan text-center">
-           <div class="oe_span12">
-               <h3 class="text-center" style="color:#FFFFFF; font-size:20px"><b>NOTE:</b>We offers 180 days online support from the date of purchase for all of our products.</h3>
-           </div>
-       </div>
-   </div>
-   <div class="oe_row" style="background-color: #ff2c27;">
-       <div style="margin-bottom:10px;" class="oe_slogan text-center">
-           <div class="oe_span12">
-           <h3 class="text-center" style="color:#FFFFFF; font-size:20px">Contact us for query, support, customization</h3>
-       </div>
-           <span>
-               <a target="new" href="http://www.oscg.cn/" style="color: #ffffff !important;font-weight:bold;">Website</a> |
+    <div class="oe_row" style="background-color: #227980;">
+        <div style="margin-bottom:10px;" class="oe_slogan text-center">
+            <div class="oe_span12">
+                <h3 class="text-center" style="color:#FFFFFF; font-size:20px"><b>NOTE:</b>We offers 30 days online
+                    support from the date of purchase for all of our products.</h3>
+            </div>
+        </div>
+    </div>
+    <div class="oe_row" style="background-color: #ff2c27;">
+        <div style="margin-bottom:10px;" class="oe_slogan text-center">
+            <div class="oe_span12">
+                <h3 class="text-center" style="color:#FFFFFF; font-size:20px">Contact us for query, support,
+                    customization</h3>
+            </div>
+            <span>
+               <a target="new" href="http://www.oscg.cn/"
+                  style="color: #ffffff !important;font-weight:bold;">Website</a> |
                <a href="mailto:sales@oscg.biz" style="color: #ffffff !important;font-weight:bold;">Write us</a>
            </span>
-       </div>
-   </div>
+        </div>
+    </div>
 </section>

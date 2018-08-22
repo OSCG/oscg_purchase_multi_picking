@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import  api, fields, models, _
+from odoo import  api, fields, models, _,exceptions, tools
 from odoo.exceptions import UserError
 from odoo.tools.float_utils import float_is_zero, float_compare
 
@@ -58,12 +58,22 @@ class PurchaseOrder(models.Model):
                 })
         return res
 
+    @api.multi
+    def print_purchase_delivery_order(self):
+        for order in self:
+            for pick in order.order_line:
+                if pick.state == 'draft':
+                    raise exceptions.Warning(_('Can not Print delivery order for a draft po:%s,pleas confirm the order and then print') % order.name)
+                return self.env.ref('oscg_purchase_multi_picking.action_report_purchase_order').report_action(self)
+
+
 
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
     picking_type_id = fields.Many2one('stock.picking.type', 'Operation Type',
                                       help="This will determine operation type of incoming shipment")
+    store_line_id = fields.Many2one('store.order.line')
 
 
     @api.multi
@@ -99,6 +109,7 @@ class PurchaseOrderLine(models.Model):
             'origin': self.order_id.name,
             'route_ids': self.order_id.picking_type_id.warehouse_id and [(6, 0, [x.id for x in self.order_id.picking_type_id.warehouse_id.route_ids])] or [],
             'warehouse_id': self.order_id.picking_type_id.warehouse_id.id,
+            'store_line_id': self.store_line_id.id
         }
         diff_quantity = self.product_qty - qty
         if float_compare(diff_quantity, 0.0,  precision_rounding=self.product_uom.rounding) > 0:

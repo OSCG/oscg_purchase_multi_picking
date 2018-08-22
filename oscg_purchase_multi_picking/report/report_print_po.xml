@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report_print_po">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <t t-foreach="o.picking_ids" t-as="picking">
+                            <div class="page-header" style="border:3px solid #987cb9;padding-top:15px;">
+                                <div class="row" style="font-size:20px;padding-top:20px;">
+                                    <div class="col-xs-6">
+                                        <span>Contact:</span>
+                                        <span t-field="picking.picking_type_id.default_location_dest_id.partner_id.name"></span>
+                                    </div>
+                                    <div class="col-xs-6;text-right;">
+                                        <span>Phone number:</span>
+                                        <span t-field="picking.picking_type_id.default_location_dest_id.partner_id.phone"></span>
+                                    </div>
+                                </div>
+                                <t t-if="picking.move_lines[0].store_line_id.order_id.pos_id.name">
+                                    <div class="row" style="font-size:20px;padding-top:20px;">
+                                    <div class="col-xs-6">
+                                        <span>POS:</span>
+                                        <span t-field="picking.move_lines[0].store_line_id.order_id.pos_id.name"></span>
+                                    </div>
+                                </div>
+                                </t>
+                                <div style="padding-top:30px;line-height:200%;font-size:20px;">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <strong>Product</strong>
+                                                </th>
+                                                <th>
+                                                    <strong>Quantity</strong>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr t-foreach="picking.move_lines" t-as="l">
+                                                <td>
+                                                    <span t-field="l.product_id"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="l.product_uom_qty"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <report
+                string="Print Delivery Order"
+                id="action_report_purchase_order"
+                model="purchase.order"
+                report_type="qweb-pdf"
+                name="oscg_purchase_multi_picking.report_print_po"
+                file="oscg_purchase_multi_picking.report_print_po"
+                print_report_name="'%Delivery Order' % (object.name or '')"
+                menu = "False"
+        />
+
+    </data>
+</odoo>

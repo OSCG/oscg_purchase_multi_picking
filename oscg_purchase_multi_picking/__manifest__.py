@@ -14,18 +14,23 @@
     'version': '0.0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['purchase'],
+    'depends': ['purchase','pos_sale'],
 
     # always loaded
     'data': [
         'security/purchase_multi_picking_security.xml',
-        'views/purchase_inherit_view.xml'
+        'wizard/views.xml',
+        'views/purchase_inherit_view.xml',
+        'views/action_print_po.xml',
+        'views/store_order_view.xml',
+        'report/report_print_po.xml',
+
     ],
     'summary': "Generate multiple pickings according to the operation type of purchase lines",
     'images': ['static/description/icon.png'],
     'license': 'OPL-1',
-    'currency': 'USD',
-    'price': 10,
+    'currency': 'EUR',
+    'price': 30,
     'support': 'sales@oscg.biz',
     'application':True,
 }

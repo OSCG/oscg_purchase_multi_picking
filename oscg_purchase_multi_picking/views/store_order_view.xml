@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="store_order_tree_view" model="ir.ui.view">
+            <field name="name">store.order.tree.view</field>
+            <field name="model">store.order</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="pos_id"/>
+                    <field name="user_id"/>
+                    <field name="date_order"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="store_order_form_view" model="ir.ui.view">
+            <field name="name">store.order.form.view</field>
+            <field name="model">store.order</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="button_apply" string="提交" type="object" states="draft"
+                                class="oe_highlight"/>
+                        <button name="button_approve" string="审批通过" type="object" states="pending"
+                                class="oe_highlight"
+                                groups="pos_stock.group_store_order_approve"/>
+                        <button name="button_return" string="退回" type="object" states="pending"
+                                class="oe_highlight"
+                                groups="pos_stock.group_store_order_approve"/>
+                        <button name="button_cancel" string="取消" type="object" states="pending"
+                                class="oe_highlight"
+                                groups="pos_stock.group_store_order_approve"/>
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="draft,pending,approve,cancel"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object"
+                                    name="action_view_delivery"
+                                    class="oe_stat_button"
+                                    icon="fa-truck"
+                                    attrs="{'invisible': [('delivery_count', '=', 0)]}">
+                                <field name="delivery_count" widget="statinfo" string="Delivery"/>
+                            </button>
+                            <button type="object"
+                                    name="action_view_purchase"
+                                    class="oe_stat_button"
+                                    icon="fa-shopping-cart"
+                                    attrs="{'invisible': [('purchase_count', '=', 0)]}">
+                                <field name="purchase_count" widget="statinfo" string="Purchase"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="pos_id"/>
+                                <field name="user_id"/>
+                                <field name="company_id" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="date_order"/>
+                                <field name="confirmation_date"
+                                       attrs="{'invisible': [('state', 'in', ['draft','pending','cancel'])]}"/>
+                            </group>
+                        </group>
+                        <div>
+                            <button name="%(action_store_order_product_import)d" string="导入订货产品"
+                                    type="action" class="oe_highlight"
+                                    attrs="{'invisible': [('state','!=','draft')]}"/>
+                        </div>
+                        <notebook>
+                            <page string="订单行">
+                                <field name="order_line">
+                                    <tree string="明细" editable="bottom">
+                                        <field name="product_id"/>
+                                        <field name="name"/>
+                                        <field name="product_uom_qty"/>
+                                        <field name="price_unit"
+                                               groups="pos_stock.group_store_order_approve"/>
+                                        <field name="seller_id"
+                                               groups="pos_stock.group_store_order_approve"/>
+                                        <field name="product_uom"/>
+                                        <field name="state" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="其他信息" invisible="1">
+                                <group string="送货信息">
+                                    <field name="picking_policy"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_view_store_order" model="ir.actions.act_window">
+            <field name="name">门店订货</field>
+            <field name="res_model">store.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem
+                id="menu_stock_purchase"
+                name="门店库存"
+                parent="point_of_sale.menu_point_root"
+                sequence="10"/>
+        <menuitem
+                id="menu_store_order"
+                name="门店订货"
+                parent="menu_stock_purchase"
+                action="action_view_store_order"
+                sequence="1"/>
+    </data>
+</odoo>
