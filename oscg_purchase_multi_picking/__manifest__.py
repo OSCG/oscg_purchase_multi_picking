@@ -27,7 +27,7 @@
 
     ],
     'summary': "Generate multiple pickings according to the operation type of purchase lines",
-    'images': ['static/description/icon.png'],
+    'images': ['static/description/oscg_purchase_multi_picking_banner.png'],
     'license': 'OPL-1',
     'currency': 'EUR',
     'price': 30,
