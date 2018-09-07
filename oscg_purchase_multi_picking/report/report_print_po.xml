@@ -64,7 +64,7 @@
                 report_type="qweb-pdf"
                 name="oscg_purchase_multi_picking.report_print_po"
                 file="oscg_purchase_multi_picking.report_print_po"
-                print_report_name="'%Delivery Order' % (object.name or '')"
+                print_report_name="'%sDelivery Order' % (object.name+' ' or '')"
                 menu = "False"
         />
 
